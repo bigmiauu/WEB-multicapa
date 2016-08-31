@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<SCRIPT TYPE="text/javascript">
+
+
+var arreglo=[];
+
+var Osos
+
+Osos = //esta declaracion es fingir ser un objeto pero en conotacion json
+
+{
+	"Nombre":"Osos",
+	"Anio":1960,
+	"Ciudad":"Chicago",
+	"Colores":["Negro","Blanco","Naranja"],
+	"getFrase": function(){console.log("Go " + this.Nombre + "Go!")}
+}
+
+
+Osos.Anio = 1919
+
+arreglo.push(Osos);
+
+
+arreglo.push( //Json es mas ligero y es una conotacion mas facil de descargar
+{
+	"Nombre":"Leones",
+	"Anio":1960,
+	"Ciudad":"Detroit",
+	"Colores":["Plata","Blanco","Azul Cielo"],
+	"getFrase": function(){console.log("Go " + this.Nombre + "Go!")}
+}
+);
+
+
+//arreglo.push("Empacadores");
+//arreglo.push("Patriotas");
+//arreglo.push("San Francisco");
+
+console.log(arreglo);
+
+
+for (i=0;i<arreglo.length;i++){
+	console.log(arreglo[i].Nombre);
+	console.log(arreglo[i].Anio);
+	console.log(arreglo[i].Ciudad);
+	for(x=0;x<arreglo[i].Colores.length;x++){
+		console.log(arreglo[i].Colores[x]);
+		arreglo[i].getFrase();
+	}
+	console.log("----------------------");
+}
+
+
+
+
+//console.log("Hola mundo");
+
+//for(i=0; i<10; i++){
+
+//	console.log(i)
+
+//}
+
+//console.log("-----------------------------")
+
+//var numero = 0;
+//while (numero < 10){
+//	console.log(numero)
+//	numero++;
+//}
+
+</SCRIPT>
