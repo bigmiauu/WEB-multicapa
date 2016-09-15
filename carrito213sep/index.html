@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<script src="angular/angular.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+	<h2>Lista de articulos</h2>
+		<hr>	
+		SubTotal: {{subTotal}}, IVA: {{iva}}, Total: {{total}}
+		<ul>
+			<li ng-repeat="arti in carrito">
+				 {{arti.canti}} {{arti.nombre}} {{arti.precio}} {{arti.importe}}
+				 <button ng-click="delete(arti, $index)">delete</button>
+			</li>
+		</ul>
+		<hr>	
+	<ul>
+		<!-- <marquee direction="up"  height="120" scrolldelay="200"> -->
+
+			<li ng-repeat="arti in articulos" ng-hide="arti.count < 1">
+
+					<img src="{{arti.img}}" width="80" height="100">
+					{{arti.nombre}}, $ {{arti.precio}}, {{arti.descri}}
+					<t ng-show="arti.oferta > 0">
+						oferta: {{arti.oferta}} % de descuento	
+					</t>					
+
+					<input type="number" ng-model="arti.canti">
+					<button ng-click="add(arti)">Agregar</button>
+			</li>
+			
+		<!-- </marquee> -->
+	</ul>
+</body>
+</html>
+
+<script type="text/javascript">
+	function mainCtrl($scope) 
+	{
+
+		$scope.total = 0;
+		$scope.subTotal = 0;
+		$scope.iva = 0;
+
+		$scope.articulos = [
+			{
+				"nombre":"Buffanda Geek M1",
+				"precio":100.0,
+				"oferta":20,
+				"count": 10,
+				"descri":"Buffanda StarWars",
+				"img":"http://www.nerdgasmo.com/wp-content/uploads/2013/01/ewok1.jpg"
+			},
+			{
+				"nombre":"Buffanda Geek M2",
+				"precio":150.0,
+				"oferta":10,
+				"count": 0,
+				"descri":"Buffanda StarWars",
+				"img":"http://4.bp.blogspot.com/-2RNkdTv7Dw4/Vm31jaxz_oI/AAAAAAAAV0g/Q5d0O2ylwJM/s1600/sw_ewok_knit_hooded_scarf.jpg"
+			},
+			{
+				"nombre":"Buffanda Geek M3",
+				"precio":120.0,
+				"oferta":0,
+				"count": 50,
+				"descri":"Moustro Come Galletas",
+				"img":"http://geekalia.com/wp-content/uploads/2012/11/gorro-monstruo-galletas.jpg"
+			}
+		];
+
+		$scope.carrito = [
+			/*{
+				"arti":{},
+				"canti":1,
+				"importe": 0.0
+			}*/
+		];
+
+		$scope.totalizar = function () {
+			$scope.subTotal = 0;
+			for (var i = 0; i < $scope.carrito.length; i++) {
+				$scope.subTotal+= $scope.carrito[i].importe;
+			}
+
+			$scope.iva = $scope.subTotal * 0.16;
+			$scope.total = $scope.iva + $scope.subTotal;
+		}
+
+		$scope.add =  function (arti){
+
+			arti.importe = arti.precio * arti.canti;	
+			$scope.carrito.push(arti);
+
+
+			$scope.totalizar();
+		}
+
+		$scope.delete = function (arti, posi) {
+			for (var i = 0; i < $scope.carrito.length; i++) {
+				if($scope.carrito[i].nombre == arti.nombre)
+				{
+					$scope.carrito.splice(posi, 1);
+					$scope.totalizar();
+				}	
+			}
+		}
+	}
+</script>
